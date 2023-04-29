@@ -1,6 +1,7 @@
 
 # SHELL
-
+Link to github- https://github.com/NaamaShiponi/Operating-Systems-pro2.git.
+* If you don't see the images, we have attached all the pictures separately
 
 ### Description
 This project consists of three parts: 
