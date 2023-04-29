@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall
-ALL_FILE = cmp copy decode encode stshel
+ALL_FILE = cmp copy decode encode stshell
 # Part A - cmp and copy tools
 PART_A_A = cmp.c cmp.h
 PART_A_B = copy.c copy.h
@@ -9,7 +9,7 @@ LIB_A_SRC = codecA.c codecA.h
 LIB_B_SRC = codecB.c codecB.h
 LIBS = lib_A lib_B 
 # Part C
-PART_C = stshel.c
+PART_C = stshell.c
 
 all: all_task_A all_task_B all_task_C
 
@@ -38,10 +38,10 @@ lib_B:	$(LIB_B_SRC)
 	gcc -shared $(LIB_B_SRC) -fPIC -o libCodecB.so
 
 # Part C
-all_task_C: stshel
+all_task_C: stshell
 
-stshel: $(PART_C)
-	$(CC) $(CFLAGS) $(PART_C) -o stshel
+stshell: $(PART_C)
+	$(CC) $(CFLAGS) $(PART_C) -o stshell
 
 
 

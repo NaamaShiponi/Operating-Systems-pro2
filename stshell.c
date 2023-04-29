@@ -225,87 +225,6 @@ void handle_pipe_3(char *cmd1[], char *cmd2[], char *cmd3[])
     waitpid(pid3, NULL, 0);
 }
 
-// void handle_pipe_3(char *cmd1[], char *cmd2[], char *cmd3[])
-// {
-//     int pipefd[2];
-//     pid_t pid1 = 1, pid2 = 1, pid3 = 1;
-
-//     if (pipe(pipefd) == -1)
-//     {
-//         perror("pipe");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     pid1 = fork();
-//     if (pid1 == -1)
-//     {
-//         perror("fork");
-//         exit(EXIT_FAILURE);
-//     }
-//     else if (pid1 == 0)
-//     {
-//         /* Child 1: execute cmd1 and write to pipe */
-//         close(pipefd[0]);
-//         dup2(pipefd[1], STDOUT_FILENO);
-//         close(pipefd[1]);
-//         execvp(cmd1[0], cmd1);
-//         perror("exec");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     pid2 = fork();
-//     if (pid2 == -1)
-//     {
-//         perror("fork");
-//         exit(EXIT_FAILURE);
-//     }
-//     else if (pid2 == 0)
-//     {
-//         /* Child 2: read from pipe, execute cmd2, and write to pipe */
-//         close(pipefd[1]);
-//         dup2(pipefd[0], STDIN_FILENO);
-//         close(pipefd[0]);
-//         int pipefd2[2];
-//         if (pipe(pipefd2) == -1)
-//         {
-//             perror("pipe");
-//             exit(EXIT_FAILURE);
-//         }
-//         pid3 = fork();
-//         if (pid3 == -1)
-//         {
-//             perror("fork");
-//             exit(EXIT_FAILURE);
-//         }
-//         else if (pid3 == 0)
-//         {
-//             /* Child 3: read from pipe, execute cmd3, and write to stdout */
-//             close(pipefd2[1]);
-//             dup2(pipefd2[0], STDIN_FILENO);
-//             close(pipefd2[0]);
-//             execvp(cmd3[0], cmd3);
-//             perror("exec");
-//             exit(EXIT_FAILURE);
-//         }
-//         else
-//         {
-//             /* Child 2: read from pipe, execute cmd2, and write to pipe */
-//             close(pipefd2[0]);
-//             dup2(pipefd2[1], STDOUT_FILENO);
-//             close(pipefd2[1]);
-//             execvp(cmd2[0], cmd2);
-//             perror("exec");
-//             exit(EXIT_FAILURE);
-//         }
-//     }
-
-//     /* Parent: wait for child processes to terminate */
-//     close(pipefd[0]);
-//     close(pipefd[1]);
-//     waitpid(pid1, NULL, 0);
-//     waitpid(pid2, NULL, 0);
-//     waitpid(pid3, NULL, 0);
-// }
 
 
 void initializeVar(char *argv1[], char *argv2[], char *argv3[], char *argv4[],char whatSign[]){
@@ -424,7 +343,7 @@ int main()
                 wait(NULL);
             }
         }
-        else if (strcmp(whatSign, "||>") == 0)
+        else if ((strcmp(whatSign, "||>") == 0) || (strcmp(whatSign, "||>>") == 0))
         {
             int fd1;
             pid_t pid1 = fork();
